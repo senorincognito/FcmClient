@@ -1,24 +1,23 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace FcmClient.Contracts
 {
-    [DataContract]
     public class FcmResponse
     {
-        [DataMember(Name = "multicast_id")]
+        [JsonProperty("multicast_id")]
         public string MulticastId { get; set; }
 
-        [DataMember(Name = "success")]
+        [JsonProperty("success")]
         public int Success { get; set; }
 
-        [DataMember(Name = "failure")]
+        [JsonProperty("failure")]
         public int Failure { get; set; }
 
-        [DataMember(Name = "canonical_ids")]
+        [JsonProperty("canonical_ids")]
         public int CanonicalIds { get; set; }
 
-        [DataMember(Name = "results")]
+        [JsonProperty("results")]
         public IEnumerable<FcmResponseResult> Results { get; set; }
     }
 }

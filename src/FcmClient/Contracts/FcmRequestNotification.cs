@@ -1,15 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace FcmClient.Contracts
 {
-    [DataContract]
     public class FcmRequestNotification
     {
 
-        [DataMember(Name = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
-        [DataMember(Name = "body")]
+        [JsonProperty("body")]
         public string Body { get; set; }
     }
 }

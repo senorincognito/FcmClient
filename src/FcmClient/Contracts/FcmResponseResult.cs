@@ -1,14 +1,13 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace FcmClient.Contracts
 {
-    [DataContract]
     public class FcmResponseResult
     {
-        [DataMember(Name = "message_id")]
+        [JsonProperty("message_id")]
         public string MessageId { get; set; }
 
-        [DataMember(Name = "error")]
+        [JsonProperty("error")]
         public string Error { get; set; }
     }
 }
