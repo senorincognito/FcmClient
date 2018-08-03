@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FcmClient.Tests", "FcmClient.Tests\FcmClient.Tests.csproj", "{036C3EFE-FD02-4195-AA82-4B688FF4564E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FcmSharpClient.Tests", "FcmSharpClient.Tests\FcmSharpClient.Tests.csproj", "{036C3EFE-FD02-4195-AA82-4B688FF4564E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FcmClient", "FcmClient\FcmClient.csproj", "{BCAA4458-D134-4BD5-A32E-DF30CD56805B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FcmSharpClient", "FcmSharpClient\FcmSharpClient.csproj", "{BCAA4458-D134-4BD5-A32E-DF30CD56805B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

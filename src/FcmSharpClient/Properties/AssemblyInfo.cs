@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FcmClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This is a C# library to send messages via FCM directly to known device tokens")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Eugen Timm")]
 [assembly: AssemblyProduct("FcmClient")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright ©2018 Eugen Timm")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

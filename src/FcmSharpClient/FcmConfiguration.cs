@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FcmClient
+namespace FcmSharpClient
 {
     public class FcmConfiguration
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using FcmClient.Contracts;
+using FcmSharpClient.Contracts;
 using Newtonsoft.Json;
 
-namespace FcmClient.Exceptions
+namespace FcmSharpClient.Exceptions
 {
     public class FcmSendException : Exception
     {

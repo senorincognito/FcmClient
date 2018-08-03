@@ -5,11 +5,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using FcmClient.Contracts;
-using FcmClient.Exceptions;
+using FcmSharpClient.Contracts;
+using FcmSharpClient.Exceptions;
 using Newtonsoft.Json;
 
-namespace FcmClient
+namespace FcmSharpClient
 {
     public class FcmClient
     {

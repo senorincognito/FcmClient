@@ -4,13 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FcmClient.Contracts;
-using FcmClient.Exceptions;
+using FcmSharpClient.Contracts;
+using FcmSharpClient.Exceptions;
 using Newtonsoft.Json;
 using NUnit.Framework;
+
 // ReSharper disable ObjectCreationAsStatement
 
-namespace FcmClient.Tests
+namespace FcmSharpClient.Tests
 {
     [TestFixture]
     public class FcmClientTests

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace FcmClient.Contracts
+namespace FcmSharpClient.Contracts
 {
     public class FcmRequestNotification
     {

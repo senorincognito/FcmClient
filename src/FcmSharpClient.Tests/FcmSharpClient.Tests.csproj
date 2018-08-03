@@ -7,8 +7,8 @@
     <ProjectGuid>{036C3EFE-FD02-4195-AA82-4B688FF4564E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FcmClient.Tests</RootNamespace>
-    <AssemblyName>FcmClient.Tests</AssemblyName>
+    <RootNamespace>FcmSharpClient.Tests</RootNamespace>
+    <AssemblyName>FcmSharpClient.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FcmClient\FcmClient.csproj">
+    <ProjectReference Include="..\FcmSharpClient\FcmSharpClient.csproj">
       <Project>{bcaa4458-d134-4bd5-a32e-df30cd56805b}</Project>
-      <Name>FcmClient</Name>
+      <Name>FcmSharpClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

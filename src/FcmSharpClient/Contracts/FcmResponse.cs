@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace FcmClient.Contracts
+namespace FcmSharpClient.Contracts
 {
     public class FcmResponse
     {

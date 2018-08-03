@@ -1,4 +1,4 @@
-﻿namespace FcmClient
+﻿namespace FcmSharpClient
 {
     public class FcmSendResult
     {
