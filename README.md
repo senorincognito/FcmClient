@@ -17,15 +17,15 @@ You will also need to create an HttpClient and manage its lifecycle by yourself.
 With the FcmClient ready you can now send a message directly to one or more known device tokens.
 ```csharp
     try {
-	    var sendResult = await fcmClient(new string[]{ "fcm_token" }, 
-	      "displayed title", "displayed message", // both visible when the app receives the push message
-	      new { key = "value" } // an optional json serializable object that can be processed by your app
-	    );
-      foreach (var failedToken in sendResult.failedSends) {
+      var result = await fcmClient.Send(new string[]{ "fcm_token" },
+        "displayed title", "displayed message", // both visible when the app receives the push message
+        new { key = "value" } // an optional json serializable object that can be processed by your app
+      );
+      foreach (var failedToken in result.FailedSends) {
         // clean up failed tokens
       }
     }
     catch (FcmSendException) {
-      // can and will occurr for invalid api keys or failed http connections
+      // can and will occur for invalid api keys or failed http connections
     }
 ```
