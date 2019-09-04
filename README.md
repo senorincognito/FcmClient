@@ -4,7 +4,7 @@ This is a C# library to send messages via FCM directly to known device tokens. I
 ## Usage
 Install nuget package
 
-    Install-Package FcmSharpClient -Version 1.0.0
+    Install-Package FcmSharpClient -Version 1.0.1
 
 To use the FcmClient you require the FCM Api-Key, which you can get from your Firebase console: https://console.firebase.google.com/project/(your-project-id)/settings/cloudmessaging
 
