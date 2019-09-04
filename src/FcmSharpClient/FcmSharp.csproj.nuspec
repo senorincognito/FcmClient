@@ -2,18 +2,20 @@
 <package >
   <metadata>
     <id>FcmClient</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Eugen Timm</authors>
     <owners>Eugen Timm</owners>
-    <licenseUrl>https://github.com/senorincognito/FcmClient/blob/master/LICENSE</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>https://github.com/senorincognito/FcmClient</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a C# library to send messages via FCM directly to known device tokens</description>
-    <releaseNotes>First Release</releaseNotes>
-    <copyright>Copyright ©2018 Eugen Timm</copyright>
+    <releaseNotes>Migrate to modern configuration</releaseNotes>
+    <copyright>Copyright ©2019 Eugen Timm</copyright>
     <tags>FCM Firebase Messaging</tags>
     <dependencies>
+        <dependency id="Microsoft.CSharp" version="4.5.0" />
         <dependency id="Newtonsoft.Json" version="11.0.2" />
+        <dependency id="System.Net.Http" version="4.3.4" />
     </dependencies>
   </metadata>
   <files>
