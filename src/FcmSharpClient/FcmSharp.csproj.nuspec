@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>FcmClient</id>
+    <id>FcmSharpClient</id>
     <version>1.0.1</version>
     <authors>Eugen Timm</authors>
     <owners>Eugen Timm</owners>
