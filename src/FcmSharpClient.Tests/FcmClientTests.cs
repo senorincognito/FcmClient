@@ -7,84 +7,77 @@ using System.Threading.Tasks;
 using FcmSharpClient.Contracts;
 using FcmSharpClient.Exceptions;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 
 // ReSharper disable ObjectCreationAsStatement
 
 namespace FcmSharpClient.Tests
 {
-    [TestFixture]
     public class FcmClientTests
     {
-        [TestFixture]
         public class Ctor : FcmClientTests
         {
-            [Test]
+            [Fact]
             public void ThrowsArgumentExceptionWhenFcmConfigurationIsNull()
             {
                 Assert.Throws<ArgumentException>(() => new FcmClient(null, new HttpClient()));
             }
 
-            [Test]
+            [Fact]
             public void ThrowsArgumentExceptionWhenHttpClientIsNull()
             {
                 Assert.Throws<ArgumentException>(() => new FcmClient(new FcmConfiguration("xxx"), null));
             }
 
-            [Test]
+            [Fact]
             public void ThrowsArgumentExceptionWhenApiKeyIsNull()
             {
                 Assert.Throws<ArgumentException>(() => new FcmClient(new FcmConfiguration(null), null));
             }
         }
 
-        [TestFixture]
         public class Send : FcmClientTests
         {
-            private FakeHttpMessageHandler _messageHandler;
-            private FcmClient _sut;
+            private readonly FakeHttpMessageHandler _messageHandler;
+            private readonly FcmClient _sut;
 
-            [SetUp]
-            public virtual void SetUp()
+            public Send()
             {
+                
                 _messageHandler = new FakeHttpMessageHandler();
                 _sut = new FcmClient(new FcmConfiguration("MY_FCM_APIKEY"), new HttpClient(_messageHandler));
             }
-
-            [TestFixture]
+            
             public class DuringInputValidation : Send
             {
-                [Test]
+                [Fact]
                 public async Task WhenTokensIsNull_ReturnsResultWith0SuccessfulAnd0FailedSends()
                 {
                     var result = await _sut.Send(null, null, null, null);
-                    Assert.AreEqual(0, result.SuccessfulSends.Length);
-                    Assert.AreEqual(0, result.FailedSends.Length);
+                    Assert.Empty(result.FailedSends);
+                    Assert.Empty(result.FailedSends);
                 }
 
-                [Test]
+                [Fact]
                 public async Task WhenTokensIsEmptyArray_ReturnsResultWith0SuccessfulAnd0FailedSends()
                 {
                     var result = await _sut.Send(null, null, null, null);
-                    Assert.AreEqual(0, result.SuccessfulSends.Length);
-                    Assert.AreEqual(0, result.FailedSends.Length);
+                    Assert.Empty(result.SuccessfulSends);
+                    Assert.Empty(result.FailedSends);
                 }
             }
 
-            [TestFixture]
             public class ForValidInput : Send
             {
                 private const string Title = "TITLE";
                 private const string Body = "BODY";
                 private readonly string[] _tokens = new[] {"TOKEN_1", "TOKEN_2"};
-                private FcmResponse _fcmResponse;
+                private readonly FcmResponse _fcmResponse;
 
-                public override void SetUp()
+                public ForValidInput()
                 {
-                    base.SetUp();
                     _fcmResponse = new FcmResponse {Results = new List<FcmResponseResult>()};
                 }
-
                 private void Setup200Response()
                 {
                     _messageHandler.Responses.Add(new HttpResponseMessage(HttpStatusCode.OK)
@@ -92,32 +85,31 @@ namespace FcmSharpClient.Tests
                         Content = new StringContent(JsonConvert.SerializeObject(_fcmResponse))
                     });
                 }
-
-                [TestFixture]
+                
                 public class ForOkStatusCodeResponses : ForValidInput
                 {
-                    [Test]
+                    [Fact]
                     public async Task UsesApiKeyFromConfiguration()
                     {
                         Setup200Response();
 
                         await _sut.Send(_tokens, Title, Body, null);
-                        Assert.AreEqual("key", _messageHandler.Requests.First().Headers.Authorization.Scheme);
-                        Assert.AreEqual("=MY_FCM_APIKEY",
+                        Assert.Equal("key", _messageHandler.Requests.First().Headers.Authorization.Scheme);
+                        Assert.Equal("=MY_FCM_APIKEY",
                             _messageHandler.Requests.First().Headers.Authorization.Parameter);
                     }
 
-                    [Test]
+                    [Fact]
                     public async Task CallsFcmUrl()
                     {
                         Setup200Response();
 
                         await _sut.Send(_tokens, Title, Body, null);
-                        Assert.AreEqual("https://fcm.googleapis.com/fcm/send",
+                        Assert.Equal("https://fcm.googleapis.com/fcm/send",
                             _messageHandler.Requests.First().RequestUri.AbsoluteUri);
                     }
 
-                    [Test]
+                    [Fact]
                     public async Task SendsFcmRequest()
                     {
                         Setup200Response();
@@ -126,15 +118,15 @@ namespace FcmSharpClient.Tests
                         
                         var fcmRequest = JsonConvert.DeserializeObject<FcmRequest>(_messageHandler.RequestBodies.First());
 
-                        Assert.AreEqual(Title, fcmRequest.Notification.Title);
-                        Assert.AreEqual(Body, fcmRequest.Notification.Body);
-                        Assert.AreEqual(_tokens, fcmRequest.RegistrationIds);
+                        Assert.Equal(Title, fcmRequest.Notification.Title);
+                        Assert.Equal(Body, fcmRequest.Notification.Body);
+                        Assert.Equal(_tokens, fcmRequest.RegistrationIds);
 
                         dynamic data = fcmRequest.Data;
-                        Assert.AreEqual("value", (string) data.key);
+                        Assert.Equal("value", (string) data.key);
                     }
 
-                    [Test]
+                    [Fact]
                     public async Task WhenSendDoesNotFail_Returns0ForFailedSends()
                     {
                         _fcmResponse.Results = new List<FcmResponseResult>
@@ -145,11 +137,11 @@ namespace FcmSharpClient.Tests
                         Setup200Response();
 
                         var result = await _sut.Send(_tokens, Title, Body, null);
-                        Assert.AreEqual(0, result.FailedSends.Length);
-                        Assert.AreEqual(2, result.SuccessfulSends.Length);
+                        Assert.Empty(result.FailedSends);
+                        Assert.Equal(2, result.SuccessfulSends.Length);
                     }
 
-                    [Test]
+                    [Fact]
                     public async Task WhenSendFails_ReturnsAppropriateCountForFailedSends()
                     {
                         _fcmResponse.Results = new List<FcmResponseResult>
@@ -163,22 +155,21 @@ namespace FcmSharpClient.Tests
                         Setup200Response();
 
                         var result = await _sut.Send(_tokens, Title, Body, null);
-                        Assert.AreEqual(1, result.FailedSends.Length);
-                        Assert.AreEqual("TOKEN_2", result.FailedSends.First());
+                        Assert.Single(result.FailedSends);
+                        Assert.Equal("TOKEN_2", result.FailedSends.First());
                     }
                 }
 
-                [TestFixture]
                 public class ForNonOkStatusCodeResponses : ForValidInput
                 {
-                    [Test]
-                    public void ThrowsFcmSendException()
+                    [Fact]
+                    public async Task ThrowsFcmSendException()
                     {
                         _messageHandler.Responses.Add(new HttpResponseMessage(HttpStatusCode.BadRequest)
                         {
                             Content = new StringContent("")
                         });
-                        Assert.ThrowsAsync<FcmSendException>(async () => await _sut.Send(_tokens, Title, Body, null));
+                        await Assert.ThrowsAsync<FcmSendException>(async () => await _sut.Send(_tokens, Title, Body, null));
                     }
                 }
             }
